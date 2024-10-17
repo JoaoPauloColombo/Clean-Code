@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 // Definindo o modelo
-const User = sequelize.define('User', {
+const Admin = sequelize.define('Admin', {
     nome: {
         type: DataTypes.STRING,
         allowNull: false
@@ -10,9 +10,13 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true // E-mail Unico
+    },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
     }
 }, {
     timestamps: true // Timestamps, para armazenar a hora que foi criado
 });
 
-module.exports = User;
+module.exports = Admin;
