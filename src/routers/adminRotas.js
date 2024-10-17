@@ -10,7 +10,6 @@ router.put('/:id', validateAdmin,validateAdminId, adminController.update ); // p
 
 router.put('/:id', validateAdmin,validateAdminId, adminController.esqueciSenha ); // parametro id
 
-
 // funcao de deletar
 router.delete('/:id',validateAdminId, adminController.delete ); // parametro id
 
@@ -18,5 +17,6 @@ router.delete('/:id',validateAdminId, adminController.delete ); // parametro id
 router.get('/:id',validateAdminId, adminController.getOne ); // parametro id
 
 router.get('/', adminController.getAll ); // funcao buscar todos 
+
 
 module.exports = router;
