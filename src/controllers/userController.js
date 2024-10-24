@@ -72,12 +72,12 @@ const userController = {
         });
       }
       return res.status(200).json({
-        msg: 'Usuario deletado com sucesso!'
+        msg: "Usuario deletado com sucesso!",
       });
     } catch (error) {
-        return res.status(500).json({
-            msg: 'Ocorreu um erro no Servidor'
-        })
+      return res.status(500).json({
+        msg: "Ocorreu um erro no Servidor",
+      });
     }
   },
 };

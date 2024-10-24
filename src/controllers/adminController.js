@@ -1,9 +1,8 @@
 const Admin = require("../models/admin");
 const adminService = require("../services/AdminService");
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 const adminController = {
-
   login: async (req, res) => {
     try {
       const { email, senha } = req.body;
@@ -41,7 +40,6 @@ const adminController = {
   create: async (req, res) => {
     try {
       const admin = await adminService.create(req.body);
-
 
       return res.status(201).json({
         msg: "Usuario criado com sucesso",
@@ -130,12 +128,12 @@ const adminController = {
         });
       }
       return res.status(200).json({
-        msg: 'Admin deletado com sucesso!'
+        msg: "Admin deletado com sucesso!",
       });
     } catch (error) {
-        return res.status(500).json({
-            msg: 'Ocorreu um erro no Servidor'
-        })
+      return res.status(500).json({
+        msg: "Ocorreu um erro no Servidor",
+      });
     }
   },
 };

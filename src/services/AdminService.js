@@ -9,7 +9,6 @@ const adminService = {
       const hashSenha = await bcrypt.hash(senha, 10);
 
       return await Admin.create({ nome, senha: hashSenha, email });
-
     } catch (error) {
       throw new Error("Ocorreu um erro ao criar Admin");
     }
