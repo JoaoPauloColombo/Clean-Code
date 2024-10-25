@@ -1,5 +1,5 @@
 const validateAdmin = (req, res, next) => {
-  const { nome, email } = req.body;
+  const { nome, email,senha } = req.body;
 
   if (!nome || typeof nome !== "string") {
     return res.status(400).json({ msg: "Campos invalidos" });

@@ -2,14 +2,14 @@ const Admin = require("../models/admin");
 const bcrypt = require("bcryptjs");
 
 const adminService = {
-  create: async (req, res) => {
+  create: async (admin) => {
     try {
-      const { nome, senha, email } = req.body;
-
+      const { nome, senha, email } = admin;
+  
       const hashSenha = await bcrypt.hash(senha, 10);
-
       return await Admin.create({ nome, senha: hashSenha, email });
     } catch (error) {
+      console.error("Erro ao criar Admin:", error);
       throw new Error("Ocorreu um erro ao criar Admin");
     }
   },
@@ -19,12 +19,14 @@ const adminService = {
       if (!admin) {
         return null;
       }
-      await admin.update({ senha: novaSenha });
+      const hashSenha = await bcrypt.hash(novaSenha, 10);
+      await admin.update({ senha: hashSenha });
       return admin;
     } catch (error) {
       throw new Error("Ocorreu um erro ao trocar a senha do Admin");
     }
   },
+
   update: async (id, adminToUpdate) => {
     try {
       const admin = await Admin.findByPk(id);
@@ -35,6 +37,7 @@ const adminService = {
       await admin.save();
       return admin;
     } catch (error) {
+      console.error("Erro ao criar Admin:", error);
       throw new Error("Ocorreu um erro ao atualizar Admin");
     }
   },
@@ -46,6 +49,8 @@ const adminService = {
       }
       return admin;
     } catch (error) {
+      console.error("Erro ao criar Admin:", error);
+
       throw new Error("Ocorreu um erro ao buscar unico Admin");
     }
   },
@@ -53,7 +58,10 @@ const adminService = {
     try {
       return await Admin.findAll();
     } catch (error) {
+      console.error("Erro ao criar Admin:", error);
+
       throw new Error("Ocorreu um erro ao buscar todos Admin");
+      
     }
   },
   delete: async (id) => {
@@ -65,6 +73,8 @@ const adminService = {
       await admin.destroy();
       return admin;
     } catch (error) {
+      console.error("Erro ao criar Admin:", error);
+
       throw new Error("Ocorreu um erro ao deletar o Admin");
     }
   },

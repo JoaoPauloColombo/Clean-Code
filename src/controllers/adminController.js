@@ -1,6 +1,7 @@
 const Admin = require("../models/admin");
 const adminService = require("../services/AdminService");
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
+const bcrypt = require("bcryptjs")
 
 const adminController = {
   login: async (req, res) => {
@@ -38,19 +39,29 @@ const adminController = {
     }
   },
   create: async (req, res) => {
+    const { nome, email, senha } = req.body;
+  
+    if (!nome || !email || !senha) {
+      return res.status(400).json({
+        msg: "Todos os campos (nome, email, senha) são obrigatórios",
+      });
+    }
+  
     try {
       const admin = await adminService.create(req.body);
-
+  
       return res.status(201).json({
-        msg: "Usuario criado com sucesso",
+        msg: "Admin criado com sucesso",
         admin,
       });
     } catch (error) {
+      console.error("Erro ao criar Admin:", error.message); // Log do erro com mais detalhes
       return res.status(500).json({
-        msg: "Erro ao tentar criar o Usuario",
+        msg: "Erro ao tentar criar o Admin",
       });
     }
   },
+  
   esqueciSenha: async (req, res) => {
     try {
       const admin = await adminService.esqueciSenha(req.params.id, req.body);
